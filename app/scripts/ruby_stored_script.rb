@@ -283,6 +283,94 @@ module RubyStoredScript
 
 
 
+  # argh: Hash
+  #     :items: 合成に用いるアイテムコードをキー、個数を値とするHash
+  #
+  # アイテム合成1を参照して合成結果を決定し、合成に用いたアイテムを消費、合計結果のアイテムを取得してGameDataを保存します。
+  # :items で指定したアイテム群で合成ができない時は "Cannot Composite" を返します。
+  # 指定したアイテムを所有していない時は "Item Shortage" を返します。
+  # 成功時は合成結果のアイテムのアイテムコードをキー、個数を値とするHashを返します。
+  def composite_items(argh)
+    # 指定されたアイテムが合成確率テーブルに存在するかをチェック
+    unless first(name: "Composition1", conditions: { element: argh[:items] })
+      return "Cannot Composite"
+    end
+
+    # 指定されたアイテムを保持しているかをチェック
+    argh[:items].each do |item_id, num|
+      if game_data.content["items"][item_id.to_s].nil? or
+          game_data.content["items"][item_id.to_s] < num
+        return "Item Shortage"
+      end
+    end
+
+    # 合成結果を取得
+    result = dice(name: "Composition1", conditions: { element: argh[:items]})
+    case result
+    when Integer
+      result = { result.to_s => 1 }
+    when Array
+      result = result.each_with_object({}){|i, o| o[i.to_s] = 1 }
+    when Hash
+      result = result
+    end
+
+    # 利用したアイテムを減らす
+    item_outgoing("item" => argh[:items], "route_cd" => 2)
+    # 取得したアイテムを格納
+    item_incoming("item" => result, "route_cd" => 8)
+
+    # GameData の保存
+    update(name: "GameData", attrs: { "content" => game_data.content })
+
+    return result
+  end
+
+
+  # 引数: argh[:armor]: 進化させる装備品の armor_id
+  # 装備進化1 を参照して装備品の進化後を取得して、賢者の石を1つ消費して装備品を進化後のものに置き換えます。
+  # 指定した装備品が進化できないものだったら "Cannot Upgrade" を返します。
+  # 指定した装備品を所有していなかったら "Armor Shortage" を返します。
+  # 賢者の石(20011)を所有していなかったら "Item Shortage" を返します。
+  # 成功時は進化後の装備品の armor_id を返します。
+  def upgrade_armor(argh)
+    # 指定されたアイテムが装備進化テーブルに存在するかをチェック
+    upgraded = first(name: "ArmorUpgrade1", conditions: { input: argh[:armor]} )
+    if upgraded.nil?
+      return "Cannot Upgrade"
+    end
+    upgraded = upgraded.output
+
+    # 指定された装備品を保有しているかをチェック
+    num = game_data.content["items"][argh][:armor.to_s]
+    if num.nil? or num < 1
+      return "Armor Shortage"
+    end
+
+    # 賢者の石(20011)を所有しているかをチェック
+    num = game_data.content["items"]["20011"]
+    if num.nil? or num < 1
+      return "Item Shortage"
+    end
+
+    # 進化元装備を減らす
+    item_outgoing(item: argh[:armor], route_cd: 6)
+    # 賢者の石を減らす
+    item_outgoing(item: 20011, route_cd: 1)
+    # 進化結果の装備を格納
+    item_incoming(item: upgraded, route_cd: 9)
+
+    # GameData の保存
+    update(name: "GameData", attrs: { "content" => game_data.content })
+
+    return upgraded
+  end
+
+
+
+
+
+
 
 end
 
