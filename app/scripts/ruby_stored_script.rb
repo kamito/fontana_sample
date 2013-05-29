@@ -371,6 +371,35 @@ module RubyStoredScript
 
 
 
+  # 説明: 経験値を加算する。レベルに必要な経験値表を参照してレベルアップもする。
+  # 戻り値:
+  #  加算後の経験値
+  #  元のレベル
+  #  加算後のレベル
+  # の配列。元のレベルと加算後のレベルが異なっていたらレベルアップしている
+  def add_exp(argh)
+    # ゲームデータの contents["exp"] に加算
+    gamedata = get(name: "GameData")
+    gamedata["content"]["exp"] ||= 0
+    gamedata["content"]["exp"] += argh[:exp]
+    update(name: "GameData", attrs: { "content" => gamedata["content"] })
+
+    # 必要経験値表を検索してレベルを設定
+    oldlevel = player.level
+    level = get(name: "RequiredExperience", input: gamedata["content"]["exp"])
+    if player.level != level
+      update(name: "Player", attrs: { "level" => level })
+    end
+
+    [ gamedata["content"]["exp"], oldlevel, level ]
+  end
+
+
+
+
+
+
+
 
 end
 
