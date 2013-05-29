@@ -56,5 +56,43 @@ module RubyStoredScript
     "OK"
   end
 
+
+
+
+  # argh: Hash
+  #   :product_cd: 商品CD
+  #   :collection: 商品メニューマスタのコレクション名
+  #
+  # return:
+  #    :collection のマスタの :product_cd の商品の購入トランザクションを開始します。
+  def order(argh)
+    payment = first(name: argh[:collection], conditions: { product_cd: argh[:product_cd] })
+    items = {
+      "collection_name" => argh[:collection],
+      "product_cd" => argh[:product_cd],
+      "item_name" => payment["name"],
+      "unit_price" => payment["price"],
+      "image_url" => payment["image_url"],
+      "description" => payment["description"]
+    }
+    start_payment(message: argh[:message], items: items)
+  end
+
+  # argh: Hash
+  #   :item_cd 購入したアイテムのID
+  #   :amount  購入個数
+  def buy(argh)
+    item_incoming(item: { argh[:item_cd].to_s => argh[:amount] }, route_cd: 1)
+    content = game_data.content
+    update(name: "GameData", attrs: { "content" => content })
+  end
+
+  def purchase_log(argh)
+    # argh[:log] に受け取った購入ログの独自フィールドをうめる
+    # login_days を追加
+    argh[:log]["login_days"] = player.login_days
+    argh[:log]
+  end
+
 end
 
