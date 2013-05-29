@@ -400,6 +400,98 @@ module RubyStoredScript
 
 
 
+  # 購入した内容をGameData.content["items"]に反映させる
+  # 引数
+  #   product_cd: 商品CD
+  #   amount: 購入数
+  #
+  # {"inputs": [
+  #   {"id":"ID123",
+  #    "action": "execute",
+  #     "name": "RubyStoredScript",
+  #     "key": "buy_item2",
+  #     "args": { "product_cd": 10001, "amount": 1}
+  #   }
+  # ] }
+  def buy_item2(argh)
+    item = first(name: get(name: "ShopSchedule"), conditions: { product_cd: argh[:product_cd] } )
+    total = item.price * argh[:amount]
+
+    c = game_data.content
+    return "no money!" if (c["money"] < total)
+
+    c["money"] -= total
+
+    case item.items
+    when Integer
+      items = { item.items.to_s => 1 }
+    when Array
+      items = item.items.each_with_object({}){|item_cd, obj| obj[item_cd.to_s] = 1 }
+    when Hash
+      items = item.items
+    else
+      return "invalid items in ShopMenu1 product_cd=#{argh[:product_cd]}"
+    end
+
+    items.each do |item_cd, num|
+      execute(name: "RubyStoredScript", key: "item_incoming", args: { item: {item_cd => num * argh[:amount]}, route_cd: 1} )
+    end
+    create(name: "PurchaseLog", attrs: { "player_id" => player.player_id, "created_at" => server_time, "level" => player.level, "product_cd" => argh[:product_cd], "unit_price" => item.price, "amount" => argh[:amount], "price" => total })
+
+    update(name: "GameData", attrs: {"content" => game_data.content})
+    "OK"
+  end
+
+
+  # 引数: argh[:armor]: 進化させる装備品の armor_id
+  # 装備進化1 を参照して装備品の進化後を取得して、賢者の石を1つ消費して装備品を進化後のものに置き換えます。
+  # 指定した装備品が進化できないものだったら "Cannot Upgrade" を返します。
+  # 指定した装備品を所有していなかったら "Armor Shortage" を返します。
+  # 賢者の石(20011)を所有していなかったら "Item Shortage" を返します。
+  # 成功時は進化後の装備品の armor_id を返します。
+  #
+  #
+  # {"inputs": [
+  #   {"id":"ID123",
+  #    "action": "execute",
+  #     "name": "RubyStoredScript",
+  #     "key": "upgrade_armor2",
+  #     "args": { "armor": 10001 }
+  #   }
+  # ] }
+  def upgrade_armor2(argh)
+    # 指定されたアイテムが装備進化テーブルに存在するかをチェック
+    upgraded = first(name: get(name: "ArmorUpgradeSchedule"), conditions: { input: argh[:armor]} )
+    if upgraded.nil?
+      return "Cannot Upgrade"
+    end
+    upgraded = upgraded.output
+
+    # 指定された装備品を保有しているかをチェック
+    num = game_data.content["items"][argh[:armor].to_s]
+    if num.nil? or num < 1
+      return "Armor Shortage"
+    end
+
+    # 賢者の石(20011)を所有しているかをチェック
+    num = game_data.content["items"]["20011"]
+    if num.nil? or num < 1
+      return "Item Shortage"
+    end
+
+    # 進化元装備を減らす
+    item_outgoing(item: argh[:armor], route_cd: 6)
+    # 賢者の石を減らす
+    item_outgoing(item: 20011, route_cd: 1)
+    # 進化結果の装備を格納
+    item_incoming(item: upgraded, route_cd: 9)
+
+    # GameData の保存
+    update(name: "GameData", attrs: { "content" => game_data.content })
+
+    return upgraded
+  end
+
 
 end
 
