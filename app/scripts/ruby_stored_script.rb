@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 module RubyStoredScript
+  # 説明
+  #   動作確認用のメソッドです。
+  #
+  # argh: Hash
+  #
+  # 戻り値:
+  #   キーをecho値を入力値のarghとするHash
+  def echo(argh)
+    {echo: argh}
+  end
+
 
   # 説明:
   #   アイテムセット用のオブジェクトの整形を行います。
