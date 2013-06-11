@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 if defined?(Rails)
-  Rails.logger.debug("StoredScript loaded #{__FILE__}")
+  Rails.logger.debug("StoredScript loaded #{__FILE__}  \n" << caller[0..30].join("\n  "))
 end
 
 module RubyStoredScript
