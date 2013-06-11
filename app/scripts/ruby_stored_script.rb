@@ -353,7 +353,7 @@ module RubyStoredScript
     upgraded = upgraded.output
 
     # 指定された装備品を保有しているかをチェック
-    num = game_data.content["items"][argh][:armor.to_s]
+    num = game_data.content["items"][argh[:armor].to_s]
     if num.nil? or num < 1
       return "Armor Shortage"
     end
