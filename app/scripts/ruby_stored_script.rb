@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+if defined?(Rails)
+  Rails.logger.debug("StoredScript loaded #{__FILE__}")
+end
+
 module RubyStoredScript
   # 説明
   #   動作確認用のメソッドです。

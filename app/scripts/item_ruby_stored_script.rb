@@ -1,3 +1,8 @@
+
+if defined?(Rails)
+  Rails.logger.debug("StoredScript loaded #{__FILE__}")
+end
+
 module ItemRubyStoredScript
 
   # argh: Hash
