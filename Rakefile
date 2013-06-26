@@ -121,3 +121,10 @@ namespace_with_fontana :server, :libgss_test do
   desc "check daemon alive"
   fontana_task :check_daemon_alive
 end
+
+
+
+namespace_with_fontana :source, :runtime do
+  desc "update app/scripts directly"
+  fontana_task :update_scripts, before: ->{ ENV["SOURCE"] = File.expand_path("../app/scripts", __FILE__) }
+end
