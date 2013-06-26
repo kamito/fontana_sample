@@ -1,0 +1,97 @@
+---
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20001
+  name: ポーション
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: hp
+    percent: false
+    value: 30
+  image: assets/item/20001.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20002
+  name: ポーションA
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: hp
+    percent: false
+    value: 100
+  image: assets/item/20002.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20003
+  name: ポーションX
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: hp
+    percent: true
+    value: 70
+  image: assets/item/20003.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20004
+  name: ポーションXXX
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: hp
+    percent: true
+    value: 100
+  image: assets/item/20004.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20005
+  name: エーテル
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: mp
+    percent: false
+    value: 30
+  image: assets/item/20005.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20006
+  name: エーテルW
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: mp
+    percent: false
+    value: 60
+  image: assets/item/20006.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20007
+  name: エーテルZ
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: mp
+    percent: true
+    value: 60
+  image: assets/item/20007.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20008
+  name: エーテルZZ
+  stored_script_name: ItemRubyStoredScript.recovery
+  stored_script_args:
+    target: mp
+    percent: true
+    value: 100
+  image: assets/item/20008.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20009
+  name: エリクサー
+  stored_script_name: ItemRubyStoredScript.recovery_all
+  stored_script_args: 
+  image: assets/item/20009.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20010
+  name: 恋の秘薬
+  stored_script_name: ItemRubyStoredScript.love_portion
+  stored_script_args: 
+  image: assets/item/20010.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20011
+  name: 賢者の石
+  stored_script_name: ItemRubyStoredScript.philosophers_stone
+  stored_script_args: 
+  image: assets/item/20011.png
+- !ruby/hash:Moped::BSON::Document
+  item_cd: 20012
+  name: たいまつ
+  stored_script_name: ItemRubyStoredScript.torch
+  stored_script_args: 
+  image: assets/item/20012.png

@@ -78,19 +78,25 @@ end
 
 namespace_with_fontana :fixtures, :"app:fixtures" do
 
-  expand_fixture = ->{
+  desc "load collection fixture"
+  fontana_task :load, before: ->{
+    raise "$FIXTURE is required" unless ENV['FIXTURE']
     ENV['FIXTURE'] = File.expand_path(ENV['FIXTURE'], '.')
   }
 
-  desc "load collection fixture"
-  fontana_task(:load, before: expand_fixture)
-
   desc "dump collection fixture to path"
-  fontana_task(:dump, before: expand_fixture)
+  fontana_task :dump, before: ->{
+    raise "$COLLECTION is required" unless ENV['COLLECTION'] || ENV['COL']
+    raise "$FIXTURES_DIR is required" unless ENV['FIXTURES_DIR']
+    ENV['FIXTURES_DIR'] = File.expand_path(ENV['FIXTURES_DIR'], '.')
+  }
 
   namespace_with_fontana :dump do
     desc "dump all collections"
-    fontana_task(:all, before: expand_fixture)
+    fontana_task :all, before: ->{
+      raise "$FIXTURES_DIR is required" unless ENV['FIXTURES_DIR']
+      ENV['FIXTURES_DIR'] = File.expand_path(ENV['FIXTURES_DIR'], '.')
+    }
   end
 
 end
@@ -124,7 +130,16 @@ end
 
 
 
-namespace_with_fontana :source, :runtime do
-  desc "update app/scripts directly"
-  fontana_task :update_scripts, before: ->{ ENV["SOURCE"] = File.expand_path("../app/scripts", __FILE__) }
+namespace_with_fontana :sync, :"runtime:update" do
+  desc "sync app/scripts directly"
+  fontana_task :app_scripts, before: ->{ ENV["APP_SCRIPTS_PATH"] = File.expand_path("../app/scripts", __FILE__) }
+
+  desc "sync spec/fixtures directly"
+  fontana_task :spec_fixtures, before: ->{ ENV["SPEC_FIXTURES_PATH"] = File.expand_path("../spec/fixtures", __FILE__) }
+
+  desc "sync app/scripts and spec/fixtures directly"
+  fontana_task :client, before: ->{
+    ENV["APP_SCRIPTS_PATH"] = File.expand_path("../app/scripts", __FILE__)
+    ENV["SPEC_FIXTURES_PATH"] = File.expand_path("../spec/fixtures", __FILE__)
+  }
 end

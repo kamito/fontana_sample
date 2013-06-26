@@ -74,10 +74,10 @@ rake deploy:resetと違って初期状態に戻しません。
 
 
 
-### サーバの実行時ディレクトリのapp/scripts を更新する
+### サーバの実行時ディレクトリのapp/scriptsとspec/fixtures を更新する
 
 ```
-$ rake source:update_scripts
+$ rake sync:client
 ```
 
 
