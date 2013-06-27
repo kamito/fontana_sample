@@ -2,15 +2,33 @@
 
 ## 概要
 
-これはGSS/fontanaのサンプルタイトルのリポジトリです。
+このリポジトリはGSS/fontanaのサンプルタイトルのリポジトリです。
 
 
 
 ## 環境設定
 
+### fontana_sampleのセットアップ
+
+#### 必要なgemのインストール
+
+```
+$ bundle install
+```
+
+
 ### fontanaのセットアップ
 
+
+#### ローカルで起動する場合
+
 これはfontanaのドキュメントを参照ください。
+
+#### 別途サーバを起動する場合
+
+* v0.3.0では未サポート
+
+プロジェクト管理者にどのサーバを使って良いのかを確認してください。
 
 
 ### 環境変数
@@ -63,7 +81,7 @@ $ rake server:shutdown_server_daemons
 GSS/fontanaに、ローカルで作業中のブランチと同じ名前のoriginのブランチのHEADをデプロイします。
 
 ```
-$ rake deploy:reset
+$ rake deploy:update
 ```
 
 rake deploy:resetと違って初期状態に戻しません。
