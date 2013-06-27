@@ -19,8 +19,12 @@ describe "RubyStoredScript" do
   end
 
   describe :use_item do
+
+    # ディレクトリを指定したフィクスチャのロード
     fixtures "simple"
-    fixtures "simple/GameData.yml"
+
+    # ファイルを単独で指定したフィクスチャのロード（v0.3.0では未サポート）
+    # fixtures "simple/GameData.yml"
 
     before do
       request.execute("ItemRubyStoredScript", "use_item", item_cd: "20001")
