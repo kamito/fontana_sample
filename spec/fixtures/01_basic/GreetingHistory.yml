@@ -1,0 +1,21 @@
+---
+- sender_cd: fontana:1000002
+  receiver_cd: fontana:1000001
+  send_at: '2012-07-31 8:30:00 +0900'
+  greeting_cd: 1
+  _id: 519b4d7ad47a656efcb10369
+- sender_cd: fontana:1000003
+  receiver_cd: fontana:1000001
+  send_at: '2012-07-31 11:30:00 +0900'
+  greeting_cd: 2
+  _id: 519b4d7ad47a656efcb1036a
+- sender_cd: fontana:1000002
+  receiver_cd: fontana:1000003
+  send_at: '2012-07-31 18:00:00 +0900'
+  greeting_cd: 3
+  _id: 519b4d7ad47a656efcb1036b
+- sender_cd: fontana:1000003
+  receiver_cd: fontana:1000002
+  send_at: '2012-08-01 01:00:00 +0900'
+  greeting_cd: 4
+  _id: 519b4d7ad47a656efcb1036c

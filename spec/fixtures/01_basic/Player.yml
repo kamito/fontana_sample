@@ -1,0 +1,155 @@
+---
+- level: 2
+  login_days: 20
+  login_count_this_day: 1
+  continuous_login_days: 0
+  player_id: fontana:1000002
+  nickname: jiro
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000002
+  pf_player_info: {}
+  first_login_at: 2012-07-21 01:00:00.000000000 Z
+  current_login_at: 2012-08-15 01:00:00.000000000 Z
+  last_login_at: 2012-08-15 01:00:00.000000000 Z
+  first_paid_at: 2012-08-01 03:00:00.000000000 Z
+  last_paid_at: 2012-08-15 03:00:00.000000000 Z
+  created_at: 2013-04-19 06:41:55.161000000 Z
+  updated_at: 2013-04-19 06:41:55.161000000 Z
+- level: 3
+  login_days: 30
+  login_count_this_day: 1
+  continuous_login_days: 3
+  player_id: fontana:1000003
+  nickname: subrow
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000003
+  pf_player_info: {}
+  first_login_at: 2012-07-26 13:10:00.000000000 Z
+  current_login_at: 2012-08-14 16:10:00.000000000 Z
+  last_login_at: 2012-08-14 16:10:00.000000000 Z
+  first_paid_at: 2012-08-10 11:00:00.000000000 Z
+  last_paid_at: 2012-08-10 11:00:00.000000000 Z
+  created_at: 2013-04-19 06:41:55.162000000 Z
+  updated_at: 2013-04-19 06:41:55.162000000 Z
+- level: 4
+  login_days: 5
+  login_count_this_day: 0
+  continuous_login_days: 0
+  player_id: fontana:1000004
+  nickname: shirow
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000004
+  pf_player_info: {}
+  first_login_at: 2012-08-01 01:20:00.000000000 Z
+  current_login_at: 2012-08-14 07:20:00.000000000 Z
+  last_login_at: 2012-08-14 07:20:00.000000000 Z
+  first_paid_at: 
+  last_paid_at: 
+  created_at: 2013-04-19 06:41:55.163000000 Z
+  updated_at: 2013-04-19 06:41:55.163000000 Z
+- authentication_token: GygW8NDz86g6Eq4hnwMw
+  continuous_login_days: 5
+  created_at: 2013-04-19 06:41:55.160000000 Z
+  current_login_at: 2012-08-15 18:50:00.000000000 Z
+  first_login_at: 2012-07-15 12:50:00.000000000 Z
+  first_paid_at: 
+  last_login_at: 2012-08-15 18:50:00.000000000 Z
+  last_paid_at: 
+  level: 1
+  login_count_this_day: 3
+  login_days: 100
+  nickname: 
+  pf_player_id: 1000001
+  pf_player_info:
+    nickname: 
+  player_id: fontana:1000001
+  signature_key: cUZNG8zdEs7E1ygU1qd8
+  updated_at: 2013-04-24 02:43:57.520000000 Z
+- player_id: fontana:1000005
+  nickname: gorow
+  level: 1
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000005
+  pf_player_info: {}
+  first_login_at: 2012-07-15 12:50:00.000000000 Z
+  current_login_at: 2012-08-15 09:50:00.000000000 Z
+  last_login_at: 2012-08-15 09:50:00.000000000 Z
+  first_paid_at: 
+  last_paid_at: 
+  login_days: 10
+  login_count_this_day: 3
+  continuous_login_days: 5
+  created_at: 2013-04-24 04:30:18.886000000 Z
+  updated_at: 2013-04-24 04:30:18.886000000 Z
+- player_id: fontana:1000006
+  nickname: rockrow
+  level: 2
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000006
+  pf_player_info: {}
+  first_login_at: 2012-07-21 01:00:00.000000000 Z
+  current_login_at: 2012-08-15 01:00:00.000000000 Z
+  last_login_at: 2012-08-15 01:00:00.000000000 Z
+  first_paid_at: 2012-08-01 03:00:00.000000000 Z
+  last_paid_at: 2012-08-15 03:00:00.000000000 Z
+  login_days: 2
+  login_count_this_day: 1
+  continuous_login_days: 0
+  created_at: 2013-04-24 04:30:18.887000000 Z
+  updated_at: 2013-04-24 04:30:18.887000000 Z
+- player_id: fontana:1000007
+  nickname: nanarow
+  level: 3
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000007
+  pf_player_info: {}
+  first_login_at: 2012-07-26 13:10:00.000000000 Z
+  current_login_at: 2012-08-14 16:10:00.000000000 Z
+  last_login_at: 2012-08-14 16:10:00.000000000 Z
+  first_paid_at: 2012-08-10 11:00:00.000000000 Z
+  last_paid_at: 2012-08-10 11:00:00.000000000 Z
+  login_days: 3
+  login_count_this_day: 1
+  continuous_login_days: 3
+  created_at: 2013-04-24 04:30:18.888000000 Z
+  updated_at: 2013-04-24 04:30:18.888000000 Z
+- player_id: fontana:1000008
+  nickname: hachi
+  level: 4
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000008
+  pf_player_info: {}
+  first_login_at: 2012-08-01 01:20:00.000000000 Z
+  current_login_at: 2012-08-14 07:20:00.000000000 Z
+  last_login_at: 2012-08-14 07:20:00.000000000 Z
+  first_paid_at: 
+  last_paid_at: 
+  login_days: 1
+  login_count_this_day: 0
+  continuous_login_days: 0
+  created_at: 2013-04-24 04:30:18.889000000 Z
+  updated_at: 2013-04-24 04:30:18.889000000 Z
+- player_id: fontana:1000009
+  nickname: kurow
+  level: 5
+  authentication_token: 
+  signature_key: 
+  pf_player_id: 1000009
+  pf_player_info: {}
+  first_login_at: 2012-08-01 01:20:00.000000000 Z
+  current_login_at: 2012-08-14 07:20:00.000000000 Z
+  last_login_at: 2012-08-14 07:20:00.000000000 Z
+  first_paid_at: 
+  last_paid_at: 
+  login_days: 1
+  login_count_this_day: 0
+  continuous_login_days: 0
+  created_at: 2013-04-24 04:30:18.891000000 Z
+  updated_at: 2013-04-24 04:30:18.891000000 Z
