@@ -8,6 +8,19 @@
 
 ## 環境設定
 
+### clone
+
+* 以下のどちらかでgithubからリポジトリの取得
+    * `git clone https://github.com/groovenauts/fontana_sample.git`
+    * `git clone git@github.com:groovenauts/fontana_sample.git`
+
+* 作られたディレクトリに移動
+    * `cd fontana_sample`
+
+* デフォルトブランチがmasterになっているので、developを使用するようにcheckout
+    * `git checkout develop`
+
+
 ### fontana_sampleのセットアップ
 
 * 必要なgemのインストール
