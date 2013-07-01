@@ -5,6 +5,7 @@ require 'fileutils'
 
 RSpec::Core::RakeTask.new(:spec)
 
+root_dir = File.expand_path("..", __FILE__)
 vendor_dir = File.expand_path("../vendor", __FILE__)
 vendor_fontana = File.expand_path("../vendor/fontana", __FILE__)
 
@@ -85,7 +86,7 @@ namespace :vendor do
       end
       Dir.chdir(vendor_fontana) do
         system!("git checkout #{fontana_branch}")
-        FileUtils.cp("config/mongoid.yml.example", "config/mongoid.yml")
+        FileUtils.cp(File.join(root_dir, "spec/server_config/mongoid.yml"), "config/mongoid.yml")
         FileUtils.cp("config/project.yml.erb.example", "config/project.yml.erb")
         system!("BUNDLE_GEMFILE=Gemfile-#{FONTANA_ENV} bundle install")
       end
@@ -97,8 +98,8 @@ namespace :vendor do
       Dir.chdir(vendor_fontana) do
         system!("git fetch origin")
         system!("git checkout origin/#{fontana_branch}")
-        system!("pwd")
         system!("BUNDLE_GEMFILE=Gemfile-#{FONTANA_ENV} bundle install")
+        system!("BUNDLE_GEMFILE=Gemfile-#{FONTANA_ENV} bundle exec rake db:drop")
       end
       Rake::Task["deploy:update"].execute
     end
