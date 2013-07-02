@@ -22,8 +22,6 @@ TASK_OPTIONS = {}
 
 def system!(cmd)
   puts "now executing: #{cmd}"
-  # res = `#{cmd} 2>&1`
-  # puts res
 
   IO.popen("#{cmd} 2>&1") do |io|
     while line = io.gets
@@ -40,7 +38,7 @@ def call_fontana_task(name)
   options = TASK_OPTIONS[name]
   options[:before].call if options[:before]
 
-  cmd = "BUNDLE_GEMFILE=Gemfile-#{FONTANA_ENV} bundle exec rake #{name}"
+  cmd = "BUNDLE_GEMFILE=Gemfile-#{FONTANA_ENV} bundle exec rake #{name} -v -t"
   if Rake.application.options.trace
     cmd << " --trace"
   end
