@@ -6,6 +6,7 @@ require 'fileutils'
 $LOAD_PATH << File.expand_path("../lib", __FILE__)
 
 require 'fontana_client_support'
+require 'fontana_client_support/tasks'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -19,10 +20,6 @@ Fontana.branch   = ENV['FONTANA_BRANCH'] || 'master'
 
 Fontana.home = ENV['FONTANA_HOME'] || (Dir.exist?(FontanaClientSupport.vendor_fontana) or Fontana.repo_url) ? FontanaClientSupport.vendor_fontana : nil
 Fontana.gemfile  = ENV['FONTANA_GEMFILE'] || "Gemfile-LibgssTest"
-
-include Fontana::ServerRake
-
-Dir[File.expand_path("../lib/tasks/**/*.rake", __FILE__)].each{|f| load(f)}
 
 desc "run spec with server_daemons"
 task :spec_with_server_daemons => [:"vendor:fontana:prepare"] do
