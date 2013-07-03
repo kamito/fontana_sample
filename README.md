@@ -29,24 +29,40 @@
 * rbenvを使っていたら
     * `$ rbenv rehash`
 
+### MongoDB
+
+* MongoDBをインストールしていなかったらインストール
+* mongodを起動
+
+
+### 環境変数の設定
+
+#### 開発環境で必要な設定
+```
+$ export FONTANA_REPO_URL=<fontanaの非公開のリポジトリのURL>
+$ export SYNC_DIRECTLY=true
+```
+
+一度fontanaのセットアップが行われれば、vendor/fontanaに設定は記録されているので、環境変数FONTANA_REPO_URLを毎回設定する必要はありません。
+
+
+#### Fontanaのdevelopを使う場合
+
+```
+$ export FONTANA_BRANCH=develop
+```
+
+
 
 ## 動作確認
 
 ### ローカルでテストの実行
 
 ```
-$ expott FONTANA_REPO_URL=<非公開のリポジトリのURL>
-$ export SYNC_DIRECTLY=true
 $ rake
 ```
 
-#### 補足1
-
 このコマンドだけでfontanaのセットアップを行い、適切にマイグレーションを実行した上で、サーバを起動し、テストを実行、サーバの停止を行います。
-
-#### 補足2 FONTANA_REPO_URLについて
-
-一度fontanaのセットアップが行われれば、vendor/fontanaに設定は記録されているので、環境変数FONTANA_REPO_URLを毎回設定する必要はありません。
 
 
 
@@ -65,7 +81,7 @@ $ rake
 ### テスト駆動開発の流れ
 
 0. 環境変数を設定する
-    * `$ expott FONTANA_REPO_URL=<非公開のリポジトリのURL>`
+    * `$ export FONTANA_REPO_URL=<非公開のリポジトリのURL>`
     * `$ export SYNC_DIRECTLY=true`
 1. サーバを起動する
     * `$ rake servers:start`
@@ -86,6 +102,7 @@ $ rake
 
 ```
 $ rake deploy:sync:update
+$ rake servers:restart
 ```
 
 
@@ -154,6 +171,11 @@ $ rake spec
 
 必要に応じて使い分けてください。
 
+
+## より詳しいこと
+
+Rakeタスクの定義については以下を参照してください。
+https://github.com/groovenauts/fontana_client_support/tree/master/lib/fontana_client_support/tasks
 
 
 ## 今後の機能追加の予定
