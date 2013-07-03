@@ -50,8 +50,8 @@ module ItemRubyStoredScript
     return "curovery HP and MP to max points"
   end
 
-  def love_portion(argh)
-    "..."
+  def love_potion(argh)
+    "Wow!"
   end
 
   def philosophers_stone(argh)

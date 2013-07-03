@@ -44,6 +44,23 @@ describe "RubyStoredScript" do
         o["result"]["content"]["items"]["20001"].should == 2 # 一つ減っている
       end
     end
+
+  end
+
+  describe "love_potion" do
+    fixtures "simple"
+
+    before do
+      request.execute("ItemRubyStoredScript", "love_potion", item_cd: "20001")
+      request.send_request
+    end
+    it do
+      request.outputs.length.should == 1
+      request.outputs.first.tap do |o|
+        o["error"].should == nil
+        o["result"].should == "Wow!"
+      end
+    end
   end
 
 end
