@@ -81,7 +81,6 @@ $ rake
 ### テスト駆動開発の流れ
 
 0. 環境変数を設定する
-    * `$ export FONTANA_REPO_URL=<非公開のリポジトリのURL>`
     * `$ export SYNC_DIRECTLY=true`
 1. サーバを起動する
     * `$ rake servers:start`
@@ -145,11 +144,18 @@ $ rake vendor:fontana:reset
 
 ある程度機能を作ってリポジトリにpushした後は、念のため、ローカルのソースコードではなく、リポジトリのコードを使って、テストを行なってください。
 
+### テスト実行前の準備
+
+```
+$ rake servers:stop
+$ unset SYNC_DIRECTLY
+$ rake deploy:scm:reset
+```
+
+
 ### １コマンドで実行する場合
 
 ```
-$ unset SYNC_DIRECTLY
-$ rake servers:stop
 $ rake
 ```
 
@@ -159,8 +165,6 @@ $ rake
 ### 何回もテストを実行する場合
 
 ```
-$ unset SYNC_DIRECTLY
-$ rake servers:stop
 $ rake deploy:scm:update
 $ rake servers:start
 $ rake spec
