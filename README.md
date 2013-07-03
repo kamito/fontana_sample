@@ -17,7 +17,7 @@
 * 作られたディレクトリに移動
     * `cd fontana_sample`
 
-* デフォルトブランチがmasterになっているので、developを使用するようにcheckout
+* (必要に応じて)デフォルトブランチがmasterになっているので、developを使用するようにcheckout
     * `git checkout develop`
 
 
@@ -26,108 +26,136 @@
 * 必要なgemのインストール
     * `$ bundle install`
 
-### fontanaのセットアップ
-
-* プロジェクト管理者にどのサーバを使って良いのかを確認してください。
-
-* ローカルで起動する場合
-    * これはfontanaのドキュメントを参照ください。
-
-* 別途サーバを起動する場合
-    * v0.3.0では未サポートです。
+* rbenvを使っていたら
+    * `$ rbenv rehash`
 
 
-### 環境変数
+## 動作確認
+
+### ローカルでテストの実行
 
 ```
-$ export FONTANA_HOME=/path/to/fontana
+$ expott FONTANA_REPO_URL=<非公開のリポジトリのURL>
+$ export SYNC_DIRECTLY=true
+$ rake
 ```
 
-設定していない場合には、このファイルのディレクトリの親ディレクトリに、fontana というディレクトリがあることを期待して動作します。
+#### 補足1
 
+このコマンドだけでfontanaのセットアップを行い、適切にマイグレーションを実行した上で、サーバを起動し、テストを実行、サーバの停止を行います。
 
-#### 直接更新の設定
+#### 補足2 FONTANA_REPO_URLについて
 
-fontanaをローカルで起動している場合、環境変数SYNC_DIRECTLYを設定することで、SCMのリポジトリを経由せずに直接、実行時の作業ディレクトリに変更を反映させることができます。
-
-`$ export SYNC_DIRECTLY=true`
-
-
-
-## テスト方法
-
-### テスト実行準備
-
-```
-$ bundle exec rake deploy:reset
-$ bundle exec rake server:launch_server_daemons
-```
-
-### テスト実行
-
-* すべてのテストを実行する場合
-    * `$ bundle exec rake spec`
-
-* 一部だけ実行する場合
-    * `$ bundle exec rspec spec/ruby_stored_script_spec.rb`
-
-
-### 変更の反映
-
-* specを変更した場合
-    * 実行するファイルを変更しているので、何もしなくても次回実行時には反映されています
-
-* app/seedsのAppSeedファイルを変更した場合
-    * SCMリポジトリからサーバに反映させる必要があります
-        1. 変更をコミットしてSCMリポジトリに反映
-        2. SCMリポジトリからサーバに反映
-            * 手動で画面から反映
-        3. マイグレーションを実行
-        4. (ローカルでfontanaを起動している場合) 再起動
-
-* ストアドスクリプト・フィクスチャを変更した場合
-    * 環境変数SYNC_DIRECTLYを設定している場合
-        * 何も行う必要ありません
-            * 次回テスト実行時に自動的にコピーされます
-
-    * 環境変数SYNC_DIRECTLYを設定してない場合
-        * SCMリポジトリからサーバに反映させる必要があります
-            1. 変更をコミットしてSCMリポジトリに反映
-            2. SCMリポジトリからサーバに反映
-                * 手動で画面から反映
-            3. マイグレーションを実行
-            4. (ローカルでfontanaを起動している場合) 再起動
-
-
-### テスト終了
-
-```
-$ bundle exec rake server:shutdown_server_daemons
-```
+一度fontanaのセットアップが行われれば、vendor/fontanaに設定は記録されているので、環境変数FONTANA_REPO_URLを毎回設定する必要はありません。
 
 
 
-## よく使用するコマンド
+## 開発作業
+
+設定ファイルやAppSeedファイル、ストアドスクリプトとそのテストを記述しながらテストを実行したり、起動している運営ツールを操作することを想定しています。
 
 
-* サーバの状態を初期状態から作り直す
-    * `$ rake deploy:reset`
-    *GSS/fontanaを初期状態にした上で、ローカルで作業中のブランチと同じ名前のoriginのブランチのHEADをデプロイします。
+### 使用可能なrakeタスクの一覧
 
-* サーバの起動
-    * `$ rake server:launch_server_daemons`
+`$ rake -T` あるいは `$ rake -A -T` でrakeタスクの一覧を表示することができます。
 
-* テストの実行
+**基本的にここで表示されるもの以外のコマンドを使う必要はありません！**
+
+
+### テスト駆動開発の流れ
+
+0. 環境変数を設定する
+    * `$ expott FONTANA_REPO_URL=<非公開のリポジトリのURL>`
+    * `$ export SYNC_DIRECTLY=true`
+1. サーバを起動する
+    * `$ rake servers:start`
+2. テストを記述する
+3. テストを実行する
     * `$ rake spec`
+4. 失敗することを確認する
+5. 実装を編集する
+6. テストを実行する
+    * `$ rake spec`
+7. 失敗したら5に戻る
+8. パスしたら、gitにコミットする
+9. サーバを終了する
+    * `$ rake servers:stop`
 
-* サーバの停止
-    * `$ rake server:shutdown_server_daemons`
 
-* サーバの状態を最新にする
-    * `$ rake deploy:update`
-    * GSS/fontanaに、ローカルで作業中のブランチと同じ名前のoriginのブランチのHEADをデプロイします。
-    * rake deploy:resetと違って初期状態に戻しません。
+#### AppSeedファイルや設定ファイルを変更した場合
 
-* サーバの実行時ディレクトリのapp/scriptsとspec/fixtures を更新する
-    * `$ rake sync:client`
+```
+$ rake deploy:sync:update
+```
 
+
+#### サーバの再起動
+
+調子が悪かったら再起動してみてください
+
+```
+$ rake servers:restart
+```
+
+
+#### fontanaを再インストール
+
+とにかく何かおかしいという場合、一度fontanaをインストールし直すとよいこともあるかもしれません。
+
+その際には一度サーバを停止するコマンドも忘れずに実行してください。
+
+```
+$ rake servers:stop
+```
+
+以下のコマンドでvendor/fontanaをクリアしてインストールが行われます。
+
+```
+$ rake vendor:fontana:reset
+```
+
+インストールを行う際に、「一時的にfontanaのdevelopブランチを使ってください」ということを言われることがあるかもしれません。
+その場合は環境変数FONTANA_BRANCHにブランチ名を設定してください。
+
+```
+$ export FONTANA_BRANCH=develop
+$ rake vendor:fontana:reset
+```
+
+
+
+## リポジトリにpushした後のテスト
+
+ある程度機能を作ってリポジトリにpushした後は、念のため、ローカルのソースコードではなく、リポジトリのコードを使って、テストを行なってください。
+
+### １コマンドで実行する場合
+
+```
+$ unset SYNC_DIRECTLY
+$ rake servers:stop
+$ rake
+```
+
+これによって、リポジトリからソースコードによってサーバが起動して、テストが実行されます。
+
+
+### 何回もテストを実行する場合
+
+```
+$ unset SYNC_DIRECTLY
+$ rake servers:stop
+$ rake deploy:scm:update
+$ rake servers:start
+$ rake spec
+```
+
+`rake deploy:scm:update` はリポジトリからソースを取得してAppSeedの登録とマイグレーションを行いますが、
+`rake deploy:scm:reset` は初期化やセットアップを実行してから `rake deploy:scm:update`を実行します。
+
+必要に応じて使い分けてください。
+
+
+
+## 今後の機能追加の予定
+
+* ローカル以外の環境で動くサーバに接続するテスト
