@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "RubyStoredScript" do
 
-  let(:network){ new_network("1000007").tap(&:login) } # HPが1の人
+  let(:network){ new_network("1000007").tap{|n| n.login.should == true } } # HPが1の人
   let(:request){ network.new_action_request }
 
   describe :echo do
