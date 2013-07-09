@@ -3,7 +3,7 @@
   login_days: 20
   login_count_this_day: 1
   continuous_login_days: 0
-  player_id: fontana:1000002
+  player_id: 1000002
   nickname: jiro
   authentication_token: 
   signature_key: 
@@ -20,7 +20,7 @@
   login_days: 30
   login_count_this_day: 1
   continuous_login_days: 3
-  player_id: fontana:1000003
+  player_id: 1000003
   nickname: subrow
   authentication_token: 
   signature_key: 
@@ -37,7 +37,7 @@
   login_days: 5
   login_count_this_day: 0
   continuous_login_days: 0
-  player_id: fontana:1000004
+  player_id: 1000004
   nickname: shirow
   authentication_token: 
   signature_key: 
@@ -65,10 +65,10 @@
   pf_player_id: 1000001
   pf_player_info:
     nickname: 
-  player_id: fontana:1000001
+  player_id: 1000001
   signature_key: cUZNG8zdEs7E1ygU1qd8
   updated_at: 2013-04-24 02:43:57.520000000 Z
-- player_id: fontana:1000005
+- player_id: 1000005
   nickname: gorow
   level: 1
   authentication_token: 
@@ -85,7 +85,7 @@
   continuous_login_days: 5
   created_at: 2013-04-24 04:30:18.886000000 Z
   updated_at: 2013-04-24 04:30:18.886000000 Z
-- player_id: fontana:1000006
+- player_id: 1000006
   nickname: rockrow
   level: 2
   authentication_token: 
@@ -102,7 +102,7 @@
   continuous_login_days: 0
   created_at: 2013-04-24 04:30:18.887000000 Z
   updated_at: 2013-04-24 04:30:18.887000000 Z
-- player_id: fontana:1000007
+- player_id: 1000007
   nickname: nanarow
   level: 3
   authentication_token: 
@@ -119,7 +119,7 @@
   continuous_login_days: 3
   created_at: 2013-04-24 04:30:18.888000000 Z
   updated_at: 2013-04-24 04:30:18.888000000 Z
-- player_id: fontana:1000008
+- player_id: 1000008
   nickname: hachi
   level: 4
   authentication_token: 
@@ -136,7 +136,7 @@
   continuous_login_days: 0
   created_at: 2013-04-24 04:30:18.889000000 Z
   updated_at: 2013-04-24 04:30:18.889000000 Z
-- player_id: fontana:1000009
+- player_id: 1000009
   nickname: kurow
   level: 5
   authentication_token: 

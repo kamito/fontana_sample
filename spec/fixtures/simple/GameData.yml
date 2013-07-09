@@ -1,6 +1,6 @@
 ---
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000001
+  player_id: 1000001
   content:
     hp: 15
     max_hp: 15
@@ -26,7 +26,7 @@
   created_at: 2013-06-26 11:54:12.865000000 Z
   updated_at: 2013-06-26 11:54:12.865000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000002
+  player_id: 1000002
   content:
     hp: 30
     max_hp: 30
@@ -47,12 +47,12 @@
   - - 20001
     - 1
   invitation_code: 
-  invite_player: fontana:1000003
+  invite_player: 1000003
   read_notifications: []
   created_at: 2013-06-26 11:54:12.866000000 Z
   updated_at: 2013-06-26 11:54:12.866000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000003
+  player_id: 1000003
   content:
     hp: 45
     max_hp: 45
@@ -76,7 +76,7 @@
   created_at: 2013-06-26 11:54:12.866000000 Z
   updated_at: 2013-06-26 11:54:12.866000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000004
+  player_id: 1000004
   content:
     hp: 10
     max_hp: 15
@@ -102,7 +102,7 @@
   created_at: 2013-06-26 11:54:12.867000000 Z
   updated_at: 2013-06-26 11:54:12.867000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000005
+  player_id: 1000005
   content:
     hp: 20
     max_hp: 30
@@ -123,12 +123,12 @@
   - - 20001
     - 1
   invitation_code: 
-  invite_player: fontana:1000006
+  invite_player: 1000006
   read_notifications: []
   created_at: 2013-06-26 11:54:12.868000000 Z
   updated_at: 2013-06-26 11:54:12.868000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000006
+  player_id: 1000006
   content:
     hp: 40
     max_hp: 45
@@ -152,7 +152,7 @@
   created_at: 2013-06-26 11:54:12.868000000 Z
   updated_at: 2013-06-26 11:54:12.868000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000007
+  player_id: 1000007
   content:
     hp: 1
     max_hp: 15
@@ -178,7 +178,7 @@
   created_at: 2013-06-26 11:54:12.869000000 Z
   updated_at: 2013-06-26 11:54:12.869000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000008
+  player_id: 1000008
   content:
     hp: 3
     max_hp: 30
@@ -199,12 +199,12 @@
   - - 20001
     - 1
   invitation_code: 
-  invite_player: fontana:1000009
+  invite_player: 1000009
   read_notifications: []
   created_at: 2013-06-26 11:54:12.870000000 Z
   updated_at: 2013-06-26 11:54:12.870000000 Z
 - !ruby/hash:Moped::BSON::Document
-  player_id: fontana:1000009
+  player_id: 1000009
   content:
     hp: 1
     max_hp: 45
