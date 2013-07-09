@@ -515,7 +515,7 @@ module RubyStoredScript
     params_json = {"receipt-data" => argh[:receipt_data]}.to_json
     # uri = URI("https://sandbox.itunes.apple.com")
 
-    logger.debug("AppGarden.platform: #{AppGarden.platform.inspect}")
+    # logger.debug("AppGarden.platform: #{AppGarden.platform.inspect}")
 
     uri = URI.parse(AppGarden.platform["app_store"]["url"])
     res = nil
@@ -555,11 +555,11 @@ module RubyStoredScript
     #    "original_purchase_date_ms"=>"1373270326687"},
     #  "status"=>0}
 
-    logger.debug("res: #{res.inspect}")
+    # logger.debug("res: #{res.inspect}")
 
     receipt = res["receipt"]
 
-    logger.debug("receipt: #{receipt.inspect}")
+    # logger.debug("receipt: #{receipt.inspect}")
 
     purchase_item_incoming(:item => {receipt["product_id"] => receipt["quantity"].to_i}) # このメソッドの戻り値を返す
   end
@@ -577,8 +577,8 @@ module RubyStoredScript
       # create(name: "ItemIncomingLog", attrs: { "player_id" => player.player_id, "created_at" => server_time, "level" => player.level, "item_cd" => item_code, "incoming_route_cd" => argh[:route_cd], "amount" => amount })
     end
 
-    logger.debug("item_hash: #{item_hash.inspect}")
-    logger.debug("content: #{content.inspect}")
+    # logger.debug("item_hash: #{item_hash.inspect}")
+    # logger.debug("content: #{content.inspect}")
 
     update(name: "GameData", attrs: { "content" => content })
 

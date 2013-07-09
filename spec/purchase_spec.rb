@@ -41,7 +41,6 @@ describe "RubyStoredScript" do
         request.outputs.last.tap do |o|
           o["error"].should == nil
           o["result"].should_not == nil
-          o["result"]["content"].should == {}
           o["result"]["content"]["purchase_items"].should == {"jp.groovenauts.libgss.cocos2dx.sample1.stone1" => 1}
         end
       end
