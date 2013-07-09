@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-if defined?(Rails)
-  Rails.logger.debug("StoredScript loaded #{__FILE__}  \n" << caller[0..30].join("\n  "))
-end
+require 'net/http'
 
 module RubyStoredScript
   # 説明
@@ -506,6 +504,85 @@ module RubyStoredScript
     update(name: "GameData", attrs: { "content" => game_data.content })
 
     return upgraded
+  end
+
+  # AppStoreで購入したレシートを認証して購入済みアイテムを増やします
+  #
+  # 引数
+  #   receipt_data: レシートデータ
+  #
+  def process_receipt(argh)
+    params_json = {"receipt-data" => argh[:receipt_data]}.to_json
+    # uri = URI("https://sandbox.itunes.apple.com")
+
+    logger.debug("AppGarden.platform: #{AppGarden.platform.inspect}")
+
+    uri = URI.parse(AppGarden.platform["app_store"]["url"])
+    res = nil
+    Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+      r = http.post('/verifyReceipt', params_json)
+      case r.code
+      when /\A2\d\d\Z/ then # 200番台
+        res = JSON.parse(r.body)
+      else
+        msg = "iTunes storeとの通信に失敗しました。 [#{r.code}] #{r.body}"
+        logger.error(msg)
+        raise msg
+      end
+    end
+    unless res["status"] == 0 #OK
+      msg = "iTunes storeからエラーが返されました。"
+      logger.error(msg + ": #{r.body}")
+      raise msg
+    end
+
+    # resの例
+    # {"receipt"=>
+    #   {"original_purchase_date_pst"=>"2013-07-08 00:58:46 America/Los_Angeles",
+    #    "purchase_date_ms"=>"1373270326687",
+    #    "unique_identifier"=>"d716285c22e00afc96f5080509474bc45050628f",
+    #    "original_transaction_id"=>"1000000079800467",
+    #    "bvrs"=>"1.0",
+    #    "transaction_id"=>"1000000079800467",
+    #    "quantity"=>"1",
+    #    "unique_vendor_identifier"=>"9D256572-7521-495A-8EC8-5568AD85114E",
+    #    "item_id"=>"668930184",
+    #    "product_id"=>"jp.groovenauts.libgss.cocos2dx.sample1.stone1",
+    #    "purchase_date"=>"2013-07-08 07:58:46 Etc/GMT",
+    #    "original_purchase_date"=>"2013-07-08 07:58:46 Etc/GMT",
+    #    "purchase_date_pst"=>"2013-07-08 00:58:46 America/Los_Angeles",
+    #    "bid"=>"jp.groovenauts.libgss.cocos2dx.sample1",
+    #    "original_purchase_date_ms"=>"1373270326687"},
+    #  "status"=>0}
+
+    logger.debug("res: #{res.inspect}")
+
+    receipt = res["receipt"]
+
+    logger.debug("receipt: #{receipt.inspect}")
+
+    purchase_item_incoming(:item => {receipt["product_id"] => receipt["quantity"].to_i}) # このメソッドの戻り値を返す
+  end
+
+  # argh: Hash
+  #   :item    : アイテムコード、アイテムコードの配列、アイテムコードをキー、個数を値とするHashのいずれか。
+  def purchase_item_incoming(argh)
+    item_hash = to_item_hash({source: argh[:item]})
+    content = game_data["content"]
+
+    items = content["purchase_items"] ||= {}
+    item_hash.each do |item_code, amount|
+      items[item_code.to_s] ||= 0
+      items[item_code.to_s] += amount
+      # create(name: "ItemIncomingLog", attrs: { "player_id" => player.player_id, "created_at" => server_time, "level" => player.level, "item_cd" => item_code, "incoming_route_cd" => argh[:route_cd], "amount" => amount })
+    end
+
+    logger.debug("item_hash: #{item_hash.inspect}")
+    logger.debug("content: #{content.inspect}")
+
+    update(name: "GameData", attrs: { "content" => content })
+
+    "OK"
   end
 
 
