@@ -512,29 +512,7 @@ module RubyStoredScript
   #   receipt_data: レシートデータ
   #
   def process_receipt(argh)
-    params_json = {"receipt-data" => argh[:receipt_data]}.to_json
-    # uri = URI("https://sandbox.itunes.apple.com")
-
-    # logger.debug("AppGarden.platform: #{AppGarden.platform.inspect}")
-
-    uri = URI.parse(AppGarden.platform["app_store"]["url"])
-    res = nil
-    Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-      r = http.post('/verifyReceipt', params_json)
-      case r.code
-      when /\A2\d\d\Z/ then # 200番台
-        res = JSON.parse(r.body)
-      else
-        msg = "iTunes storeとの通信に失敗しました。 [#{r.code}] #{r.body}"
-        logger.error(msg)
-        raise msg
-      end
-    end
-    unless res["status"] == 0 #OK
-      msg = "iTunes storeからエラーが返されました。"
-      logger.error(msg + ": #{r.body}")
-      raise msg
-    end
+    res = verify_receipt({name: "AppStore", receipt_data: argh[:receipt_data]})
 
     # resの例
     # {"receipt"=>

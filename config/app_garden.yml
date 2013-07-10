@@ -37,5 +37,5 @@ platform:
     counter_mask: "h7i9o"
     random_part_length: 30
 
-  app_store:
+  AppStore:
     url: "https://sandbox.itunes.apple.com"
