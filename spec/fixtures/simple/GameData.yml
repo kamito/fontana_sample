@@ -11,6 +11,8 @@
     items:
       '20001': 3
       '20005': 1
+    purchase_items:
+      'jp.groovenauts.libgss.cocos2dx.sample1.stone1': 10
     equipments:
       head: 10018
       body: 10012

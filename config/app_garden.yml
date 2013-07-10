@@ -29,9 +29,13 @@ consumer_secret: "cefadb98d551472bb1915fde3cd1ca4f"
 # 各種プラットフォーム情報
 platform:
   title: "サンプルアプリ１"
-
+  target: "sandbox"
+  
   player_id_gen:
     prefix: ""
     pid_mask: "0z1ekq"
     counter_mask: "h7i9o"
     random_part_length: 30
+
+  AppStore:
+    url: "https://sandbox.itunes.apple.com"

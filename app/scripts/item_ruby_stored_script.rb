@@ -1,8 +1,4 @@
 
-if defined?(Rails)
-  Rails.logger.debug("StoredScript loaded #{__FILE__}  \n" << caller[0..30].join("\n  "))
-end
-
 module ItemRubyStoredScript
 
   # argh: Hash
