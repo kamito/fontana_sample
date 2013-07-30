@@ -53,7 +53,7 @@
 ### scripts ###
 
 #### item_ruby_stored_script.rb ####
-use_itemなどアイテムに関わる処理が記述されているスクリプト。
+use\_itemなどアイテムに関わる処理が記述されているスクリプト。
 
 #### ruby_stored_script.rb ####
 アイテムを使用したときや取得したときの処理などが記述されているスクリプト。
@@ -64,18 +64,18 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 マスタデータの追加を確認。
 
 #### 内容 ####
-* 02_item.xlsxのアイテムマスタに対して、3つのアイテムを追加する。
+* 02\_item.xlsxのアイテムマスタに対して、3つのアイテムを追加する。
   - 20013: 聖水
   - 20014: 毒消し草
   - 20015: 毒消し草X -> 削除予定
 
 #### 期待される動作 ####
 * アイテムマスタデータに2つのデータが追加されていることを確認。
-* dm_version,sm_versionがバージョンアップしている。
+* dm\_version,sm\_versionがバージョンアップしている。
 * 差分データとして追加分のアイテムデータが2件存在する。
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_001"に変更して、AppSeed登録。
+* SCMからブランチを"testset\_001"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 
@@ -84,17 +84,17 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 マスタデータの変更を確認。
 
 #### 内容 ####
-* 02_item.xlsxのアイテムマスタに対して、2つのアイテムを変更する。
+* 02\_item.xlsxのアイテムマスタに対して、2つのアイテムを変更する。
   - 20002: ポーションA -> ポーションS
   - 20004: ポーションXXX -> ポーションXX
 
 #### 期待される動作 ####
 * アイテムマスタデータの2つのデータが変更されていることを確認
-* dm_version,sm_versionがバージョンアップしている。
+* dm\_version,sm\_versionがバージョンアップしている。
 * 差分データとして変更分のアイテムデータが2件存在する。
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_002"に変更して、AppSeed登録。
+* SCMからブランチを"testset\_002"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 
@@ -103,16 +103,16 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 マスタデータの削除を確認。
 
 #### 内容 ####
-* 02_item.xlsxのアイテムマスタに対して、1つのアイテムを削除する。
+* 02\_item.xlsxのアイテムマスタに対して、1つのアイテムを削除する。
   - 20015: 毒消し草X
 
 #### 期待される動作 ####
 * アイテムマスタデータの1つのデータが削除されていることを確認
-* dm_version,sm_versionがバージョンアップしている。
+* dm\_version,sm\_versionがバージョンアップしている。
 * 差分データとして削除分のアイテムデータが1件存在する。
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_003"に変更して、AppSeed登録。
+* SCMからブランチを"testset_003"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 
@@ -121,14 +121,14 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 ゲームデータのフィールド追加
 
 #### 内容 ####
-* 01_base.xlsxのゲームデータにステータス(status)という項目をフィールドとして追加。
+* 01\_base.xlsxのゲームデータにステータス(status)という項目をフィールドとして追加。
 
 #### 期待される動作 ####
 * ゲームデータのフィールド定義が増えている
-* other_versionがバージョンアップしている。
+* other\_versionがバージョンアップしている。
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_004"に変更して、AppSeed登録。
+* SCMからブランチを"testset_004"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 
@@ -137,10 +137,10 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 ストアドスクリプトの実装。
 
 #### 内容 ####
-* status_ruby_stored_script.rbというストアドスクリプトを追加。
+* status\_ruby\_stored\_script.rbというストアドスクリプトを追加。
   - 以下のメソッドを実装。
-    + StatusRubyStoredScript#status_going(argh)
-    + StatusRubyStoredScript#recovery_status(argh)
+    + StatusRubyStoredScript#status\_going(argh)
+    + StatusRubyStoredScript#recovery\_status(argh)
 
 #### 期待される動作 ####
 * 以下のアクション実行で、ゲームデータにステータスが付与されている。
@@ -150,7 +150,7 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 * すべてのサブバージョンのバージョンが更新されない
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_005"に変更して、AppSeed登録。
+* SCMからブランチを"testset\_005"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 * アクション実行から変更点に記載されているアクションを実行してみる。
@@ -163,15 +163,15 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 * ステータス系アイテムを使用したときのストアドスクリプトを変更する。
 * また、アイテム使用時のパラメータも追記する。
   - 20014: 毒消し草
-    + ストアドスクリプト名: StatusRubyStoredScript#recovery_status
+    + ストアドスクリプト名: StatusRubyStoredScript#recovery\_status
     + ストアドスクリプト引数: {"status":"poison"}
 
 #### 期待される動作 ####
-* 以下のアクションを実行することで、item_cd=20014のアイテムが10個プレイヤーに付与される。
+* 以下のアクションを実行することで、item\_cd=20014のアイテムが10個プレイヤーに付与される。
   ```
   {"inputs":[
-    {"action":"execute","name":"RubyStoredScript","key":"item_incomming",
-     "args":{"item":{"20014":10},"route_cd":"1"}}
+    {"action":"execute","name":"RubyStoredScript","key":"buy",
+     "args":{"item_cd":"20014","amount":10}}
   ]}
   ```
 * 以下のアクションを実行することで、ゲームデータのステータスが空になっている。
@@ -181,7 +181,7 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 * dm_version,sm_versionがバージョンアップしている。
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_006"に変更して、AppSeed登録。
+* SCMからブランチを"testset\_006"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 * アクション実行から変更点に記載されているアクションを実行してみる。
@@ -191,13 +191,13 @@ use_itemなどアイテムに関わる処理が記述されているスクリプ
 設定ファイルの変更
 
 #### 内容 ####
-* config/app_garden.ymlファイルの"platform.player_id_gen.pid_mask"と"platform.player_id_gen.counter_mask"の値を変更する
+* config/app\_garden.ymlファイルの"platform.player\_id\_gen.pid\_mask"と"platform.player\_id\_gen.counter\_mask"の値を変更する
 
 #### 期待される動作 ####
 * すべてのサブバージョンのバージョンが更新されない
 
 #### 必要な作業 ####
-* SCMからブランチを"master_diff_007"に変更して、AppSeed登録。
+* SCMからブランチを"testset_007"に変更して、AppSeed登録。
 * AppSeedのマイグレーション
 * ローカルサーバの再起動
 
