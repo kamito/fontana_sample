@@ -33,8 +33,8 @@ platform:
   
   player_id_gen:
     prefix: ""
-    pid_mask: "0z1ekq"
-    counter_mask: "h7i9o"
+    pid_mask: "0z1ekp"
+    counter_mask: "h7i9z"
     random_part_length: 30
 
   AppStore:
